@@ -60,8 +60,7 @@ list<T> parallel_quick_sort(list<T>input) {
 
 	auto new_lower(parallel_quick_sort(move(lower_list)));
 	
-	future<list<T>> new_upper_future;
-	async(&parallel_quick_sort<T>, move(input));
+	future<list<T>> new_upper_future(async(&parallel_quick_sort<T>, move(input)));
 
 	results.splice(results.begin(), new_lower);
 	results.splice(results.end(), new_upper_future.get());
