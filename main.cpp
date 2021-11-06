@@ -51,7 +51,7 @@ list<T> parallel_quick_sort(list<T>input) {
 	results.splice(input.begin(), input, input.end());
 	T pivot = *results.begin();
 
-	//partition in the input
+	//determing the dividing point
 	auto dividing_point = partition(input.begin(), input.end(), [&](T const& t) {return pivot < t; });
 	
 	//move lower part of the list to seperate list so that we can make recursive call
@@ -64,6 +64,8 @@ list<T> parallel_quick_sort(list<T>input) {
 
 	results.splice(results.begin(), new_lower);
 	results.splice(results.end(), new_upper_future.get());
+	
+	return results;
 
 }
 
